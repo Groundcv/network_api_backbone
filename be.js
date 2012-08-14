@@ -37,23 +37,6 @@ Behance.Collection = Backbone.Collection.extend({
   
 });
 
-Behance.gather = {
-  
-  initialize : function() {
-    
-    console.log( 'Be initialized' );
-    
-    Behance.gather.projects( 4503871 );
-    Behance.gather.users( 104095 );
-    Behance.gather.wips( 11447 );
-    // Behance.gather.featured_projects();
-    
-    
-  } // initialize
-  
-  
-};
-
 $(function() {
-  // Behance.gather.initialize();
+  
 });
