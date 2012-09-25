@@ -1,10 +1,10 @@
 Behance = Behance || {};
-Behance.ProjectsCollection = {};
+Behance.WipsCollection = {};
 
 /**
  * Behance project collection.
  */
-Behance.ProjectsCollection = Behance.Collection.extend({
+Behance.WipsCollection = Behance.Collection.extend({
   model : Backbone.Model,
   
   // Special params object for API pagination, etc., including defaults.
@@ -13,7 +13,7 @@ Behance.ProjectsCollection = Behance.Collection.extend({
   },
   
   url : function () {
-    return Behance.api_url + 'users/' + this.id + '/projects?api_key=' + Behance.api_key + '&' + $.param(this.params);
+    return Behance.api_url + 'users/' + this.user + '/wips?api_key=' + Behance.api_key + '&' + $.param(this.params);
   },
   
   /**
@@ -51,7 +51,7 @@ Behance.ProjectsCollection = Behance.Collection.extend({
    * @param {Object} response The response from the server.
    */
   parse : function (response) {
-    return response.projects;
-  } // BehanceProjectsCollection#parse
+    return response.wips;
+  } // BehanceWipsCollection#parse
   
 });

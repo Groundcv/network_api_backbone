@@ -5,11 +5,11 @@ Behance.UserModel = Behance.Model.extend({
    * Set the API endpoint for users.
    */
   url : function () {
-    return Behance.api_url + 'users/' + this.id + '?api_key=' + Behance.api_key;
+    return Behance.api_url + 'users/' + this.get('user') + '?api_key=' + Behance.api_key;
   },
   
   /**
-   * The Behance API returns a 'users' object. We want the contents of the object.
+   * The Behance API returns a 'user' object. We want the contents of the object.
    * @param {Object} response The response from the server.
    */
   parse : function (response) {
@@ -24,13 +24,40 @@ Behance.UserModel = Behance.Model.extend({
   getProjects : function() {
     
     var projects = new Behance.ProjectsCollection();
-    projects.id = this.get('id');
+    projects.user = this.get('user');
     projects.fetch();
     this.set('projects', projects);
     
     return this;
     
-  }, // BehanceUserModel#getProjects
+  }, // getProjects
+  
+  /**
+   * Get this user's WIPs.
+   * Using this method requires the BehanceWipsCollection base collection.
+   */
+  getWips : function() {
+    var wips = new Behance.WipsCollection();
+    wips.user = this.get('user');
+    wips.fetch();
+    this.set('wips', wips);
+  }, // getWips
+  
+  /**
+   * Get this user's collections.
+   * Using this method requires the BehanceCollectionsCollection base collection.
+   * @returns {Object} The BehanceUserModel object.
+   */
+  getCollections : function() {
+    
+    var collections = new Behance.CollectionsCollection();
+    collections.user = this.get('user');
+    collections.fetch();
+    this.set('collections', collections);
+    
+    return this;
+    
+  }, // getCollections
   
   /**
    * Get a specific project page.
@@ -65,17 +92,6 @@ Behance.UserModel = Behance.Model.extend({
   getPreviousProjectsPage : function () {
     this.getPage('projects', 'prev');
     return this;
-  },
-  
-  /**
-   * Get this user's WIPs.
-   * Using this method requires the BehanceWipsCollection base collection.
-   */
-  getWips : function() {
-    var wips = new Behance.WipsCollection();
-    wips.id = this.get('id');
-    wips.fetch();
-    this.set('wips', wips);
   }
   
 });

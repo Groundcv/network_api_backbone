@@ -1,6 +1,7 @@
 Behance = Behance || {};
 
 Behance.WipModel = Behance.Model.extend({
+  
   /**
    * Set the API endpoint for users.
    */
@@ -13,20 +14,20 @@ Behance.WipModel = Behance.Model.extend({
    * @param {Object} response The response from the server.
    */
   parse : function (response) {
+        
+    response.wip.revisions = new Behance.Collection( response.wip.revisions, { model : Behance.WipRevisionModel } );
+    
     return response.wip;
   },
   
   /**
    * Get a revision of this WIP.
-   * Using this method requires the RevisionsCollection base collection.
+   * Using this method requires the WipsRevisionsCollection base collection.
    * @returns {Object} The WipModel object.
    */
-  getRevision : function() {
+  getRevision : function (revision_id) {
     
-    var comments = new Behance.CommentsCollection();
-    comments.id = this.get('id');
-    comments.fetch();
-    this.set('comments', comments);
+    this.get('revisions').get( revision_id ).set({ wip_id : this.id }).fetch();
     
     return this;
     

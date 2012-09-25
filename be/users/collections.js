@@ -1,10 +1,10 @@
 Behance = Behance || {};
-Behance.WipsCollection = {};
+Behance.CollectionsCollection = {};
 
 /**
- * Behance project collection.
+ * Behance collections collection.
  */
-Behance.WipsCollection = Behance.Collection.extend({
+Behance.CollectionsCollection = Behance.Collection.extend({
   model : Backbone.Model,
   
   // Special params object for API pagination, etc., including defaults.
@@ -13,11 +13,11 @@ Behance.WipsCollection = Behance.Collection.extend({
   },
   
   url : function () {
-    return Behance.api_url + 'users/' + this.id + '/wips?api_key=' + Behance.api_key + '&' + $.param(this.params);
+    return Behance.api_url + 'users/' + this.user + '/collections?api_key=' + Behance.api_key + '&' + $.param(this.params);
   },
   
   /**
-   * Get a specific project page.
+   * Get a specific collections page.
    * @param {String} name Collection name to fetch results for.
    * @param {Number|String} page Page number.
    */
@@ -47,11 +47,11 @@ Behance.WipsCollection = Behance.Collection.extend({
   },
   
   /**
-   * The Behance API returns a 'projects' object. We want the contents of the object.
+   * The Behance API returns a 'collections' object. We want the contents of the object.
    * @param {Object} response The response from the server.
    */
   parse : function (response) {
-    return response.projects;
-  } // BehanceWipsCollection#parse
+    return response.collections;
+  } // BehanceCollectionsCollection#parse
   
 });

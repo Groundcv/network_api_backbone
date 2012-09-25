@@ -11,6 +11,9 @@ Behance.SearchCollection = Behance.Collection.extend({
   
   model : Backbone.Model,
   
+  // Search type: projects, wips, users, collections
+  search_type : 'projects',
+  
   /**
    * Available params
    */
@@ -26,7 +29,7 @@ Behance.SearchCollection = Behance.Collection.extend({
   }, // params
   
   url : function () {
-    return Behance.api_url + 'search?api_key=' + Behance.api_key + '&' + $.param(this.params);
+    return Behance.api_url + this.search_type + '?api_key=' + Behance.api_key + '&' + $.param(this.params);
   }, // url
   
   parse : function( response ) {

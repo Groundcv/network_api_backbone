@@ -1,10 +1,10 @@
 Behance = Behance || {};
-Behance.CommentsCollection = {};
+Behance.ProjectsCollection = {};
 
 /**
  * Behance project collection.
  */
-Behance.CommentsCollection = Behance.Collection.extend({
+Behance.ProjectsCollection = Behance.Collection.extend({
   model : Backbone.Model,
   
   // Special params object for API pagination, etc., including defaults.
@@ -13,7 +13,7 @@ Behance.CommentsCollection = Behance.Collection.extend({
   },
   
   url : function () {
-    return Behance.api_url + 'projects/' + this.id + '/comments?api_key=' + Behance.api_key + '&' + $.param(this.params);
+    return Behance.api_url + 'users/' + this.user + '/projects?api_key=' + Behance.api_key + '&' + $.param(this.params);
   },
   
   /**
@@ -52,6 +52,6 @@ Behance.CommentsCollection = Behance.Collection.extend({
    */
   parse : function (response) {
     return response.projects;
-  } // BehanceCommentsCollection#parse
+  } // BehanceProjectsCollection#parse
   
 });
